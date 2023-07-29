@@ -1,2 +1,65 @@
 @import './common';
 @import './example';
+.loader {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+    position: relative;
+    border: 3px solid;
+    border-color: #de3500 #0000 #fff #0000;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: 1s rotate linear infinite;
+}
+
+.loader:before,
+.loader:after {
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    border: 10px solid transparent;
+    border-bottom-color: #fff;
+    transform: translate(-10px, 19px) rotate(-35deg);
+}
+
+.loader:after {
+    border-color: #de3500 #0000 #0000 #0000;
+    transform: translate(32px, 3px) rotate(-35deg);
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+
+.breed-select {
+    margin: 15px;
+    background-color: #f8f8f8;
+   color: blue;
+   font-size: 18px;
+   width: 500px;
+}
+
+.cat-info {
+    padding-left: 15px;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+.text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 20px;
+    width: 1000px;
+}
+
+.text-name {
+    font-weight: bold;
+    font-size: 18px;
+
+}
