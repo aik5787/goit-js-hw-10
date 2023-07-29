@@ -1,4 +1,5 @@
 import Notiflix from 'notiflix';
+import SlimSelect from 'slim-select'
 
 
 
@@ -42,10 +43,12 @@ function fillBreedsSelect() {
     showLoader();
   fetchBreeds()
     .then(response => {
-      const optionsHTML = response.map(breed => {
-        return `<option value="${breed.id}">${breed.name}</option>`;
-      }).join("");
-        breedSelect.innerHTML = optionsHTML;
+      const breedOptions = response.map(breed => {
+       return { value: breed.id, text: breed.name }});
+         const slimSelect = new SlimSelect({
+    select: '.breed-select',
+    data: breedOptions,
+  });
         hideLoader();
         
     })
@@ -76,23 +79,19 @@ function onBreedSelectChange() {
 };
 
 function displayCatInfo(catData) {
-  const catImage = catData[0].url;
-  const catName = catData[0].breeds[0].name;
-  const catDescription = catData[0].breeds[0].description;
-  const catTemperament = catData[0].breeds[0].temperament;
+  const { url: catImage, breeds: [{ name: catName, description: catDescription, temperament: catTemperament }] } = catData[0];
 
   const catInfo = `
-    <img src="${catImage}" alt="${catName}" width = 400>
+    <img src="${catImage}" alt="${catName}" width="400">
     <div class="text-wrapper">
-    <p class="text"><span class="text-name">Name:</span> ${catName}</p>
-    <p class="text"><span class="text-name">Description:</span> ${catDescription}</p>
-    <p class="text"><span class="text-name">Temperament:</span> ${catTemperament}</p>
-     </div>
+      <p class="text"><span class="text-name">Name:</span> ${catName}</p>
+      <p class="text"><span class="text-name">Description:</span> ${catDescription}</p>
+      <p class="text"><span class="text-name">Temperament:</span> ${catTemperament}</p>
+    </div>
   `;
 
   catInfoDiv.innerHTML = catInfo;
 }
-
 
 
 
