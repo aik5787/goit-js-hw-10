@@ -34,8 +34,8 @@ function hideError() {
  
 
 document.addEventListener("DOMContentLoaded", () => {
+  breedSelect.removeEventListener("change", onBreedSelectChange);  
   fillBreedsSelect();
-    breedSelect.addEventListener("change", onBreedSelectChange);  
 });
 
 function fillBreedsSelect() {
@@ -49,7 +49,8 @@ function fillBreedsSelect() {
     select: '.breed-select',
     data: breedOptions,
   });
-        hideLoader();
+      hideLoader();
+       breedSelect.addEventListener("change", onBreedSelectChange);
         
     })
     .catch(error => {
